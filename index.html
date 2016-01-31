@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>WordBrain Solver</title>
+		<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script type="text/javascript" src="code.js"></script>
+		<script type="text/javascript" src="dictionary.js"></script>
+		<style type="text/css">
+			body {
+				background: white;
+			}
+
+			.col-sm-10 {
+				background: lightblue;
+			}
+
+			.text-centered {
+				text-align: center;
+			}
+
+			table, td, tr {
+				border: 1px solid black;
+				padding: 2px;
+				background: white;
+			}
+
+			td {
+				font-size: 40px;
+				width: 50px;
+				height: 50px;
+				text-align: center;
+			}
+
+			.header {
+				padding-bottom: 30px;
+			}
+
+			#size, #length {
+				height: 30px;
+				width: 30px;
+				font-size: 20px;
+			}
+
+			#size-label {
+				font-size: 20px;
+				font-weight: normal;
+			}
+
+			#solveButton {
+				width: 75px;
+				height: 30px;
+				font-size: 20px;
+			}
+
+			.output {
+				font-size: 25px;
+				background: whitesmoke;
+				box-shadow: 2px 2px 2px;
+				text-align: center;
+				//border: 1px solid whitesmoke;
+			}
+
+			.output:hover {
+				box-shadow: 2px 2px 10px;
+				border: 1px solid gray;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			
+			<!-- Heading -->
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1 header">
+					<h2 class="text-centered"><b>WordBrain Solver</b></h2>
+				</div>
+			</div>
+
+			<!-- Board Size -->
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="row">
+						<div class="col-sm-4 col-sm-offset-4">
+							<div class="text-centered">
+								<label class="text-centered" id="size-label" for="size">Board Size:&nbsp;</label>
+								<input type="text" id="size" class="text-centered" size="1" maxlength="1" onkeypress="return formatBoardSize(event, this);" onkeyup="resetTable(this.value);" value="4" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Padding -->
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1 header"></div>
+			</div>
+
+			<!-- Table -->
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1 header">
+					<div class="row">
+						<div class="col-sm-6 col-sm-offset-3">
+							<table style="margin: auto;" id="table">
+								<tr>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="A" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="B" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="C" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="D" /></td>
+								</tr>
+								<tr>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="A" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="B" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="C" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="D" /></td>
+								</tr>
+								<tr>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="A" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="B" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="C" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="D" /></td>
+								</tr>
+								<tr>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="A" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="B" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="C" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="D" /></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Word Size -->
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="row">
+						<div class="col-sm-4 col-sm-offset-4">
+							<div class="text-centered">
+								<label class="text-centered" id="size-label" for="size">Word Size:&nbsp;</label>
+								<input type="text" id="length" class="text-centered" size="1" maxlength="1" onkeypress="return formatBoardSize(event, this);" value="3" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Submit Button -->
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="row">
+						<div class="col-sm-4 col-sm-offset-4">
+							<div class="text-centered">
+								<br />
+								<button id="solveButton" onclick="solve();">Solve</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Padding -->
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1 header"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1 header"></div>
+			</div>
+
+			<!-- Output -->
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1" id="output">
+					<div class="row">
+						<div class="col-sm-11 col-sm-offset-1">
+							
+							<div class="row">
+								<div class="col-sm-5 col-sm-offset-3" id="singleOutput">
+									<!--<p class="output" onmouseover="highlight();" onmouseout="highlight();">ABCD</p>-->
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-5" id="outputBox">
+									<!--<p class="output" onmouseover="highlight();" onmouseout="highlight();">ABCD</p>-->
+								</div>
+
+
+								<div class="col-sm-5 col-sm-offset-1" id="outputBox2">
+									<!--<p class="output" onmouseover="highlight();" onmouseout="highlight();">ABCD</p>-->
+								</div>
+							</div>
+
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<script type="text/javascript">
+			var table = document.getElementById("table");
+
+			function resetTable(size)
+			{
+
+				if (size == null || size == "")
+					return;
+
+				table.innerHTML = "";
+
+				for (var i=0; i < size; i++)
+				{
+					var row = "<tr>\n";
+
+					for (var j=0; j < size; j++)
+					{
+						row += "<td><input type='text' class='text-centered' size='1' maxlength='1' onkeypress='return formatChar(event, this);' style='border: none;' /></td>\n";
+					}
+
+					row += "</tr>\n";
+
+					table.innerHTML += row;
+				}
+			}
+
+			function formatBoardSize(e, element)
+			{
+				var charCode = e ? e.charCode : event.charCode;
+
+				if (charCode == 13)
+					element.blur();
+
+				return charCode >= 49 && charCode <= 57
+			}
+
+			function formatChar(e, element)
+			{
+				var charCode = e ? e.charCode : event.charCode;
+
+				if (charCode >= 97 && charCode <= 122)
+					charCode -= 32;
+
+				if (charCode >= 65 && charCode <= 90)
+				{
+					element.value = String.fromCharCode(charCode);
+				}
+
+				return false;
+			}
+		</script>
+	</body>
+</html>
