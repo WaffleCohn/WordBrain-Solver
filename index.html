@@ -32,10 +32,10 @@
 			}
 
 			.header {
-				padding-bottom: 30px;
+				padding-bottom: 15px;
 			}
 
-			#size, #length {
+			#size, .length {
 				height: 30px;
 				width: 30px;
 				font-size: 20px;
@@ -46,10 +46,14 @@
 				font-weight: normal;
 			}
 
-			#solveButton {
+			#solveButton, #resetButton {
 				width: 75px;
 				height: 30px;
 				font-size: 20px;
+			}
+
+			#resetButton {
+				display: none;
 			}
 
 			.output {
@@ -57,13 +61,51 @@
 				background: whitesmoke;
 				box-shadow: 2px 2px 2px;
 				text-align: center;
+				padding-left: 8px;
+				padding-right: 8px;
+				margin-right: 15px;
 				//border: 1px solid whitesmoke;
+			}
+
+			.answer-set {
+				background: beige;
+				box-shadow: 2px 2px 2px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				margin-bottom: 20px;
 			}
 
 			.output:hover {
 				box-shadow: 2px 2px 10px;
 				border: 1px solid gray;
 			}
+
+			.aligner {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.aligner-item {
+				margin-left: 4px;
+			}
+
+			.wordButton {
+				width: 25px;
+				height: 25px;
+			}
+
+			#sizesRow1 {
+				margin-bottom: 4px;
+			}
+
+			#answerContainer {
+				padding-bottom: 20px;
+				overflow-y: scroll;
+				height: 215px;
+				display: none;
+			}
+
 		</style>
 	</head>
 	<body>
@@ -102,28 +144,28 @@
 						<div class="col-sm-6 col-sm-offset-3">
 							<table style="margin: auto;" id="table">
 								<tr>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="A" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="B" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="C" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="D" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="T" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="S" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="T" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="E" /></td>
 								</tr>
 								<tr>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="A" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="B" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="C" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="D" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="R" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="A" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="C" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="D" /></td>
 								</tr>
 								<tr>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="A" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="B" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="C" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="D" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="I" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="E" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="K" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="G" /></td>
 								</tr>
 								<tr>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="A" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="B" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="C" /></td>
-									<td><input type="text" class="text-centered" size="1" maxlength="1" onkeypress="return formatChar(event, this);" style="border: none;" value="D" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="P" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="L" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="E" /></td>
+									<td><input type="text" class="text-centered" size="1" maxlength="1" onclick="this.value = '';" onkeypress="return formatChar(event, this);" style="border: none;" value="E" /></td>
 								</tr>
 							</table>
 						</div>
@@ -136,9 +178,24 @@
 				<div class="col-sm-10 col-sm-offset-1">
 					<div class="row">
 						<div class="col-sm-4 col-sm-offset-4">
-							<div class="text-centered">
-								<label class="text-centered" id="size-label" for="size">Word Size:&nbsp;</label>
-								<input type="text" id="length" class="text-centered" size="1" maxlength="1" onkeypress="return formatBoardSize(event, this);" value="3" />
+							<div class="text-centered aligner">
+								<div id="sizesContainer">
+									<div class="row">
+										<label class="text-centered" id="size-label" for="size">Word Sizes:&nbsp;</label>
+										<button class="wordButton aligner-item" onclick="addWord();">+</button>
+										<button class="wordButton aligner-item" onclick="removeWord();">-</button>
+									</div>
+									<div id="sizesRow1" class="row">
+										<input type="text" class="length text-centered aligner-item" size="1" maxlength="1" onkeypress="return formatBoardSize(event, this);" value="4" />
+										<input type="text" class="length text-centered aligner-item" size="1" maxlength="1" onkeypress="return formatBoardSize(event, this);" value="8" />
+										<input type="text" class="length text-centered aligner-item" size="1" maxlength="1" onkeypress="return formatBoardSize(event, this);" value="4" />
+									</div>
+
+									<div id="sizesRow2" class="row">
+										<!--<input type="text" class="length text-centered aligner-item" size="1" maxlength="1" onkeypress="return formatBoardSize(event, this);" value="2" />-->
+									</div>
+								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -152,7 +209,8 @@
 						<div class="col-sm-4 col-sm-offset-4">
 							<div class="text-centered">
 								<br />
-								<button id="solveButton" onclick="solve();">Solve</button>
+								<button id="solveButton" onclick="setTimeout(solve, 0); this.disabled = true;">Solve</button>
+								<button id="resetButton" onclick="reset(); this.style.display = 'none';">Reset</button>
 							</div>
 						</div>
 					</div>
@@ -190,10 +248,30 @@
 								</div>
 							</div>
 
+							<div class="row text-centered">
+								<div class="col-sm-9 col-sm-offset-1" id="answerContainer">
+								<!--<div class="answer-set">
+										<span class="output" onmouseover="highlight();" onmouseout="highlight();">ABCDEFGHI</span>
+										<span class="output" onmouseover="highlight();" onmouseout="highlight();">ABCDEFGHI</span>
+										<span class="output" onmouseover="highlight();" onmouseout="highlight();">ABCDEFGHI</span>
+										<span class="output" onmouseover="highlight();" onmouseout="highlight();">ABCDEFGHI</span>
+									</div>-->
+								</div>
+							</div>
+
 						</div>
 						
 					</div>
 				</div>
+			</div>
+
+
+			<!-- Padding -->
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1 header"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1 header"></div>
 			</div>
 
 		</div>
