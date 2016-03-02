@@ -75,10 +75,13 @@ function solve()
 		lengths = document.getElementById("sizesContainer").getElementsByClassName("length"),
 		solveButton = document.getElementById("solveButton"),
 		resetButton = document.getElementById("resetButton"),
+		output = document.getElementById("answerContainer"),
 		wordLengths = new Array();
 
-	solveButton.style.display = "none";
-	resetButton.style.display = "inline";
+	//solveButton.style.display = "none";
+	//resetButton.style.display = "inline";
+
+	output.innerHTML = "";
 
 	var sum = 0;
 	for (var i=0; i < lengths.length; i++)
@@ -138,9 +141,11 @@ function solve()
 			}
 		}
 	}
+
+	solveButton.disabled = false;
 }
 
-var output = document.getElementById("output");
+//var output = document.getElementById("output");
 
 // str[], grid[], len[], row, col, points[], word, wordGrids[]
 function permute2(str, grid, len, row, col, points, word, wordGrids)
@@ -264,7 +269,7 @@ function permute2(str, grid, len, row, col, points, word, wordGrids)
 				{
 					for (var j=0; j < grid.length; j++)
 					{
-						if (grid[i][j])
+						if (newGrid2[i][j])
 							permute2(newStr, newGrid2, len, i, j, newPoints, word+1, newWordGrid);
 					}
 				}
