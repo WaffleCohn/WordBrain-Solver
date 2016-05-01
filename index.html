@@ -11,7 +11,12 @@
 			}
 
 			.col-sm-10 {
-				background: lightblue;
+				//background: #81D4FA;
+			}
+
+			.container {
+				background: #81D4FA;
+				height: 100%;
 			}
 
 			.text-centered {
@@ -29,6 +34,10 @@
 				width: 50px;
 				height: 50px;
 				text-align: center;
+			}
+
+			#title {
+				margin-top: 50px;
 			}
 
 			.header {
@@ -112,11 +121,11 @@
 	</head>
 	<body>
 		<div class="container">
-			
+
 			<!-- Heading -->
 			<div class="row">
 				<div class="col-sm-10 col-sm-offset-1 header">
-					<h2 class="text-centered"><b>WordBrain Solver</b></h2>
+					<h1 id="title" class="text-centered"><b>WordBrain Solver</b></h1>
 				</div>
 			</div>
 
@@ -197,7 +206,7 @@
 										<!--<input type="text" class="length text-centered aligner-item" size="1" maxlength="1" onkeypress="return formatBoardSize(event, this);" value="2" />-->
 									</div>
 								</div>
-								
+
 							</div>
 						</div>
 					</div>
@@ -232,7 +241,7 @@
 				<div class="col-sm-10 col-sm-offset-1" id="output">
 					<div class="row">
 						<div class="col-sm-11 col-sm-offset-1">
-							
+
 							<div class="row">
 								<div class="col-sm-5 col-sm-offset-3" id="singleOutput">
 									<!--<p class="output" onmouseover="highlight();" onmouseout="highlight();">ABCD</p>-->
@@ -262,24 +271,20 @@
 							</div>
 
 						</div>
-						
+
 					</div>
 				</div>
-			</div>
-
-
-			<!-- Padding -->
-			<div class="row">
-				<div class="col-sm-10 col-sm-offset-1 header"></div>
-			</div>
-			<div class="row">
-				<div class="col-sm-10 col-sm-offset-1 header"></div>
 			</div>
 
 		</div>
 
 		<script type="text/javascript">
-			var table = document.getElementById("table");
+			var table = document.getElementById("table"),
+				container = document.getElementsByClassName("container")[0];
+
+			container.style.height = window.innerHeight + "px";
+
+			window.addEventListener("resize", function() {container.style.height = window.innerHeight + "px";});
 
 			function resetTable(size)
 			{
